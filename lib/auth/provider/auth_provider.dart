@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import 'package:noviindus_test2/auth/service/auth_service.dart';
+import 'package:noviindus_test2/home/screens/homescreen.dart';
 import 'package:noviindus_test2/widgets/customSnackbar.dart';
 
 
@@ -59,7 +60,7 @@ class AuthProvider extends ChangeNotifier {
     if (loginModel?.status == true) {
       _token = loginModel?.token?.access;
       debugPrint("Login successful");
-      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
     } else {
       CustomSnackbar.show(context: context, message:  'Login failed', isSucces: false);
     }
