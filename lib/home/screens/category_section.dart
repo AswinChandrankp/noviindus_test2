@@ -96,6 +96,7 @@ class CategorySection extends StatelessWidget {
                       final index = entry.key;
                       final category = entry.value;
                       return CategoryButton(
+                        borderColor:  Color(0x33C70000),
                         label: category.categorie.title!,
                         isSelected: category.isSelected,
                         onTap: () {

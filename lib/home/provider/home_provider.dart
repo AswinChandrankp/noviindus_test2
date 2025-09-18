@@ -12,11 +12,7 @@ import 'package:video_player/video_player.dart';
 
 class Homeprovider extends ChangeNotifier {
    final _homeService = HomeService();
-Homeprovider(){
-  getHomeDatas();
-  getCategories();
-  notifyListeners();
-}
+
 
  List<FeedResult> _feedVideos = [];
   List<FeedResult> get feedVideos => _feedVideos;
@@ -26,59 +22,7 @@ Homeprovider(){
 
 
 
-  Future<void> getHomeDatas() async {
-    HomeModel homeModel = await _homeService.getHomeData();
-    if (homeModel.results.isNotEmpty) {
-      _feedVideos = homeModel.results;
-      notifyListeners();
-    }
-  }
 
-
-
- Future<void> setSelectedIndex(int index) async {
-
-    _selectedintex = index;
-    notifyListeners();
-   
- }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  =========================================== ADD FEED  SECTION =======================================
 
 
 
@@ -103,6 +47,12 @@ TextEditingController get descriptionController => _descriptionController;
   File? get thumbnailFile => _thumbnailFile;
 
 
+
+Homeprovider(){
+  getHomeDatas();
+  getCategories();
+  notifyListeners();
+}
   Future<void> getCategories() async {
  
     CategoryModel categoryModel = await _homeService.getCategory();
@@ -115,8 +65,43 @@ TextEditingController get descriptionController => _descriptionController;
       notifyListeners();
     }
   }
+
+  
+  Future<void> getHomeDatas() async {
+    HomeModel homeModel = await _homeService.getHomeData();
+    if (homeModel.results.isNotEmpty) {
+      _feedVideos = homeModel.results;
+      notifyListeners();
+    }
+  }
+
+
+
+ Future<void> setSelectedIndex(int index) async {
+
+    _selectedintex = index;
+    notifyListeners();
+   
+ }
+
 Future<void> addVideo(BuildContext context) async {
-   ResponseModel response =  await _homeService.uploadFeed(videoFile!, thumbnailFile!, descriptionController.text, newcategories.where((category) => category.isSelected).map((category) => category.id).toList());
+
+
+    final String categories = newcategories.where((category) => category.isSelected).map((category) => category.id).toList().join(',').toString();
+   if (videoFile == null || thumbnailFile == null) {
+     CustomSnackbar.show(context: context, message:  'Please select video and thumbnail', isSucces: false);
+     return;
+   }
+
+   if (categories.isEmpty) {
+     CustomSnackbar.show(context: context, message:  'Please select at least one category', isSucces: false);
+     return;
+   }
+ if (descriptionController.text.isEmpty) {
+     CustomSnackbar.show(context: context, message:  'Please enter description', isSucces: false);
+     return;
+   }
+   ResponseModel response =  await _homeService.uploadFeed(videoFile!, thumbnailFile!, descriptionController.text,categories);
 
    if(response.status! ){
     CustomSnackbar.show(context: context, message:  response.message!, isSucces: true);

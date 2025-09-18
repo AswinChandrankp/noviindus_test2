@@ -6,6 +6,7 @@ import 'package:noviindus_test2/home/provider/home_provider.dart';
 import 'package:noviindus_test2/home/screens/category_section.dart';
 import 'package:noviindus_test2/home/screens/widgets/add_thumbnail_widget.dart';
 import 'package:noviindus_test2/home/screens/widgets/add_video_widget.dart';
+import 'package:noviindus_test2/widgets/customCategorybutton.dart';
 import 'package:provider/provider.dart';
 
 class AddfeedScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class AddfeedScreen extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            leadingWidth: 60,
+            leadingWidth: 50,
             leading: Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: InkWell(
@@ -61,24 +62,31 @@ class AddfeedScreen extends StatelessWidget {
                     homeprovider.addVideo(context);
                   },
                   borderRadius: BorderRadius.circular(15),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF7A1F1F),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Text(
-                      "Share Post",
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                  child: CategoryButton( 
+                    isSelected: true,
+                    textColor: const Color.fromARGB(205, 255, 255, 255) ,
+                    label: "Share Post", onTap: () {
+                        homeprovider.addVideo(context);
+                
+                    },),
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(
+                  //     horizontal: 16,
+                  //     vertical: 8,
+                  //   ),
+                  //   decoration: BoxDecoration(
+                  //     color: Color(0xFF7A1F1F),
+                  //     borderRadius: BorderRadius.circular(15),
+                  //   ),
+                  //   child: Text(
+                  //     "Share Post",
+                  //     style: TextStyle(
+                  //       color: Colors.white.withOpacity(0.9),
+                  //       fontSize: 13,
+                  //       fontWeight: FontWeight.w400,
+                  //     ),
+                  //   ),
+                  // ),
                 ),
               ),
             ],

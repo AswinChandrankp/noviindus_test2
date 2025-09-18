@@ -43,7 +43,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Check if token is already saved
+
   final String? savedToken = await getSavedToken();
 
   runApp(MyApp(initialToken: savedToken));

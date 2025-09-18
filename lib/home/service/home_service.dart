@@ -86,7 +86,7 @@ Future<ResponseModel> uploadFeed(
  File videoFile,
   File thumbnailFile,
    String description,
-   List<int> selectedCategoryIds,
+   String selectedCategoryIds,
 ) async {
   try {
     final url = Uri.parse('${AppConstants.BaseUrl}${AppConstants.addFeed}'); 
@@ -106,7 +106,7 @@ Future<ResponseModel> uploadFeed(
       contentType: MediaType('image', 'jpeg'),
     ));
     request.fields['desc'] = description;
-    request.fields['category'] = selectedCategoryIds.join(',').toString();
+    request.fields['category'] = selectedCategoryIds;
 
     final response = await request.send();
     final   ResponseModel responseBody = ResponseModel.fromJson(jsonDecode(await response.stream.bytesToString()));

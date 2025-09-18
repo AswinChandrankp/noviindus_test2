@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
     ),
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: Colors.red.shade900,
+        backgroundColor: Color(0xFFC70000),
         onPressed: () {
           Navigator.push(
             context,
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add_rounded,  color: Colors.white,size: 45,),
       ),
       body:
        SafeArea(
